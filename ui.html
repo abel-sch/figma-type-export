@@ -1,0 +1,21 @@
+<h2>Text Styles Exporter</h2>
+<button id="export">Export Text Styles</button>
+<button id="cancel">Cancel</button>
+<textarea id="output" rows="10" cols="50" readonly></textarea>
+<script>
+document.getElementById('export').onclick = () => {
+  parent.postMessage({ pluginMessage: { type: 'export-text-styles' } }, '*')
+}
+
+document.getElementById('cancel').onclick = () => {
+  parent.postMessage({ pluginMessage: { type: 'cancel' } }, '*')
+}
+
+onmessage = (event) => {
+  const message = event.data.pluginMessage;
+  if (message.type === 'export-data') {
+    document.getElementById('output').value = message.data;
+  }
+}
+</script>
+
